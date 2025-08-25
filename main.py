@@ -1,4 +1,5 @@
 from configuration import Configuration
+from builder import Builder
 
 configuration_object = Configuration()
 
@@ -16,7 +17,7 @@ def main():
     print(f"\tSpecial charset is {Configuration.SPECIAL}")
 
     
-    
+    print(Builder().build().generate())
     
     
 
