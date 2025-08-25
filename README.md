@@ -8,6 +8,7 @@ Configuration file available at ~/.passwdgen/passwdgen.profile
 Usage:
 python3 ./main.py [options]
 
+```text
 python3 ./main.py --help 
           --help - this help 
           --length=n - the password length 
@@ -24,3 +25,4 @@ python3 ./main.py --help
           --with-upper=str - set the uppercase alphabet (could require escaping \xxx) 
           --with-numbers=str - set the vailables digits (could require escaping \xxx) 
           --with-specials=str - set the special chars string (could require escaping \xxx) 
+```
