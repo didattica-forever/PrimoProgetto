@@ -20,7 +20,12 @@ class Builder:
     def with_length(self, pwd_length):
         self.pwd_length = pwd_length
         return self
-        
+    
+    def with_letters(self, letters):
+        self.lower = letters.lower()
+        self.upper = letters.upper()
+        return self
+    
     def with_no_lower(self):
         self.lower = None
         return self
