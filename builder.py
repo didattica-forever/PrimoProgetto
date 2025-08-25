@@ -164,7 +164,21 @@ class Builder:
         
         def print(self):
             title = "Parameters in use:"
-            str = f"{title}\n\tlower==>{self.lower}\n\tupper==>{self.upper}\n\tnumbers==>{self.numbers}\n\tspecials==>{self.specials}\n\tcomplete==>{self.complete}\n"
+            str = f"{title}\n\tlower==>{self.lower}\n\tupper==>{self.upper}\n\tnumbers==>{self.numbers}\n\tspecials==>{self.specials}\n\tcomplete==>{self.complete}"
             print(str)
+            if self.min_lower > 0:
+                print(f"\tMinimum number of lowercase={self.min_lower}")            
+            
+            if self.min_upper > 0:
+                print(f"\tMinimum number of uppercase={self.min_upper}")   
+                         
+            if self.min_numbers > 0:
+                print(f"\tMinimum number of numbers={self.min_numbers}") 
+                                        
+            if self.min_specials > 0:
+                print(f"\tMinimum number of special character={self.min_specials}")
+                
+            print("")
+                
             
         
