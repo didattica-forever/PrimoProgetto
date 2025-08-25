@@ -1,26 +1,76 @@
+import getopt
+import sys
 from configuration import Configuration
 from builder import Builder
 
 configuration_object = Configuration()
 
 def main():
-    print("Hello from passwordgenerator!")
-    home_dir = Configuration.HOME_DIRECTORY
-    print(f"Home directory is {home_dir}")
+    # parsing arguments with getopt
     
-   # configuration_object = Configuration()
-    print(f"Run parameters:")
-    print(f"\tConfiguration Password Length is {Configuration.PASSWORD_LENGTH}")
-    print(f"\tLowercase charset is {Configuration.LOWERCASE}")
-    print(f"\tUppercase charset is {Configuration.UPPERCASE}")
-    print(f"\tNumbers charset is {Configuration.NUMBERS}")
-    print(f"\tSpecial charset is {Configuration.SPECIAL}")
-
+    argumentList = sys.argv[1:] # Remove 1st argument from the list of command line arguments
+    # Options
+    options = "hl:"
+    # Long options
+    long_options = ["help","length=",
+                    "min-lower=","min-upper=","min-numbers=","min-specials=",
+                    "no-lower", "no-upper", "no-numbers", "no-specials",
+                    "with-specials="
+                    ]
     
-    print(Builder().build().generate())
+    builder = Builder()
+    
+    try:
+        # Parsing argument
+        arguments, values = getopt.getopt(argumentList, options, long_options)   
+        for currentArgument, currentValue in arguments:
+            if currentArgument in ("-h", "--help"):
+                help()
+                exit(0)
+            if currentArgument in ("--length"):
+                builder.with_length(int(currentValue))                
+            if currentArgument in ("--min-lower"):
+                builder.with_min_lower(int(currentValue))
+            if currentArgument in ("--min-upper"):
+                builder.with_min_upper(int(currentValue))   
+            if currentArgument in ("--min-numbers"):
+                builder.with_min_numbers(int(currentValue))
+            if currentArgument in ("--min-specials"):
+                builder.with_min_specials(int(currentValue))
+            if currentArgument in ("--no-lower"):
+                builder.with_no_lower()                 
+            if currentArgument in ("--no-upper"):
+                builder.with_no_upper() 
+            if currentArgument in ("--no-numbers"):
+                builder.with_no_numbers()          
+            if currentArgument in ("--no-specials"):
+                builder.with_no_specials()   
+            if currentArgument in ("--with-specials"):
+                builder.with_specials(str(currentValue))                          
+    except getopt.error as err:
+    # output error, and return with an error code
+        print (str(err))
+        exit(1)
+    # end parsing
     
     
-
+    print(builder.build().generate())
+    
+    
+def help():
+    print(f"""
+          -h --help - this help
+          --length=n - the password length
+          --no-lower - don't use lowercase characters
+          --no-upper - don't use uppercase characters
+          --no-numbers - don't use digits
+          --no-specials - don't use special characters
+          --min-lower=n - minumum number of lowercase chars the password will contain
+          --min-upper=n - minumum number of uppercase chars the password will contain
+          --min-numbers=n - minumum number of digits the password will contain
+          --min-specials=n - minumum number of special chars the password will contain
+    """)
+    pass
 
 if __name__ == "__main__":
     main()

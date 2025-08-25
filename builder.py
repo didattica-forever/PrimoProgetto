@@ -10,12 +10,16 @@ class Builder:
         self.pwd_length = Configuration.PASSWORD_LENGTH
         self.lower = Configuration.LOWERCASE
         self.upper = Configuration.UPPERCASE
-        self.nummbers = Configuration.NUMBERS
+        self.numbers = Configuration.NUMBERS
         self.specials = Configuration.SPECIAL
         self.min_lower = 0
         self.min_upper = 0
         self.min_numbers = 0
         self.min_specials = 0
+        
+    def with_length(self, pwd_length):
+        self.pwd_length = pwd_length
+        return self
         
     def with_no_lower(self):
         self.lower = None
@@ -42,22 +46,22 @@ class Builder:
         return self
         
     def with_no_numbers(self):
-        self.nummbers = None
+        self.numbers = None
         return self
         
     def with_numbers(self, numbers):
-        self.nummbers = numbers
+        self.numbers = numbers
         return self
             
     def with_min_numbers(self, min_numbers):
         self.min_numbers = min_numbers
         return self
         
-    def with_no_pecials(self):
+    def with_no_specials(self):
         self.specials = None
         return self
           
-    def with_pecials(self, specials):
+    def with_specials(self, specials):
         self.specials = specials
         return self
     
@@ -66,11 +70,11 @@ class Builder:
         return self
     
     def build(self):
-        return self.PasswordGenerator(Configuration.PASSWORD_LENGTH, 
-                                      Configuration.LOWERCASE,
-                                      Configuration.UPPERCASE,
-                                      Configuration.NUMBERS,
-                                      Configuration.SPECIAL,
+        return self.PasswordGenerator(self.pwd_length, 
+                                      self.lower,
+                                      self.upper,
+                                      self.numbers,
+                                      self.specials,
                                       self.min_lower,
                                       self.min_upper,
                                       self.min_numbers,
@@ -86,13 +90,13 @@ class Builder:
             self.upper = self.shuffle(upper)
             self.numbers = self.shuffle(nummbers)
             self.specials = self.shuffle(specials)
-            self.complete = self.join(self.lower, self.upper, self.numbers, self.specials)
             self.min_lower = min_lower
             self.min_upper = min_upper
             self.min_numbers = min_numbers
             self.min_specials = min_specials
             
         def generate(self):
+            self.complete = self.join(self.lower, self.upper, self.numbers, self.specials)
             self.print()
             passwd = ""
             passwd += self.generate_lower(self.min_lower)
@@ -140,9 +144,7 @@ class Builder:
                 for i in range(0, count):
                     str += self.complete[randrange(len(self.complete))]
                 return str
-            return ""
-        
-        
+            return ""        
         
         def shuffle(self, str):
             if str == None:
