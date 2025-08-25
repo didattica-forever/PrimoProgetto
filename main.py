@@ -24,8 +24,8 @@ def main():
         # Parsing argument
         arguments, values = getopt.getopt(argumentList, options, long_options)   
         for currentArgument, currentValue in arguments:
-            print(f"***>{currentArgument}={currentValue}")
-            if currentArgument in ("-hl:", "--help"):
+            # print(f"***>{currentArgument}={currentValue}")
+            if currentArgument in ("-h", "--help"):
                 help()
                 exit(0)
             if currentArgument in ("--length"):

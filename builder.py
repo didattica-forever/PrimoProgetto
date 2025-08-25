@@ -163,7 +163,8 @@ class Builder:
             return str
         
         def print(self):
-            str = f"lower==>{self.lower}\nupper==>{self.upper}\nnumbers==>{self.numbers}\nspecials==>{self.specials}\ncomplete==>{self.complete}"
+            title = "Parameters in use:"
+            str = f"{title}\n\tlower==>{self.lower}\n\tupper==>{self.upper}\n\tnumbers==>{self.numbers}\n\tspecials==>{self.specials}\n\tcomplete==>{self.complete}\n"
             print(str)
             
         
