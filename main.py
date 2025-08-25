@@ -29,24 +29,24 @@ def main():
                 exit(0)
             if currentArgument in ("--length"):
                 builder.with_length(int(currentValue))                
-            if currentArgument in ("--min-lower"):
+            elif currentArgument in ("--min-lower"):
                 builder.with_min_lower(int(currentValue))
-            if currentArgument in ("--min-upper"):
+            elif currentArgument in ("--min-upper"):
                 builder.with_min_upper(int(currentValue))   
-            if currentArgument in ("--min-numbers"):
+            elif currentArgument in ("--min-numbers"):
                 builder.with_min_numbers(int(currentValue))
-            if currentArgument in ("--min-specials"):
+            elif currentArgument in ("--min-specials"):
                 builder.with_min_specials(int(currentValue))
-            if currentArgument in ("--no-lower"):
+            elif currentArgument in ("--no-lower"):
                 builder.with_no_lower()                 
-            if currentArgument in ("--no-upper"):
+            elif currentArgument in ("--no-upper"):
                 builder.with_no_upper() 
-            if currentArgument in ("--no-numbers"):
+            elif currentArgument in ("--no-numbers"):
                 builder.with_no_numbers()          
-            if currentArgument in ("--no-specials"):
+            elif currentArgument in ("--no-specials"):
                 builder.with_no_specials()   
-            if currentArgument in ("--with-specials"):
-                builder.with_specials(str(currentValue))                          
+            # elif currentArgument in ("--with-specials"):
+            #     builder.with_specials(str(currentValue))                          
     except getopt.error as err:
     # output error, and return with an error code
         print (str(err))
