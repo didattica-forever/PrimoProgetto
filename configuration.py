@@ -25,7 +25,19 @@ class Configuration:
             self.read_profile()
             
     def create_profile(self):
-        
+        with open(Configuration.PROFILE, "w") as file:
+            file.write("###\n")
+            file.write("### Passwdgen Profile V 1.0\n")
+            file.write("###\n")
+            file.write("default_passwd_length 8 # default password length if none specified\n")
+            file.write("default_charset ascii_min,ascii_max,num # default password charset\n")
+            file.write("charset ascii_min qwertyuiopasdfghjklzxcvbnm\n")
+            file.write("charset ascii_max QWERTYUIOPASDFGHJKLZXCVBNM\n")
+            file.write("charset num 1234567890\n")
+            file.write("charset special $?@#+-_\n")
+            file.write("\n\n\n\n\n")
+            file.write("### END OF PROFILE\n")
+            
         
         print(f"{Configuration.PROFILE} created!")
         pass
